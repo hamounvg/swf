@@ -1,0 +1,905 @@
+var _____WB$wombat$assign$function_____=function(name){return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name))||self[name];};if(!self.__WB_pmw){self.__WB_pmw=function(obj){this.__WB_source=obj;return this;}}{
+let window = _____WB$wombat$assign$function_____("window");
+let self = _____WB$wombat$assign$function_____("self");
+let document = _____WB$wombat$assign$function_____("document");
+let location = _____WB$wombat$assign$function_____("location");
+let top = _____WB$wombat$assign$function_____("top");
+let parent = _____WB$wombat$assign$function_____("parent");
+let frames = _____WB$wombat$assign$function_____("frames");
+let opens = _____WB$wombat$assign$function_____("opens");
+//<!--
+// \include\js\search\search_home.js@@\main\3 
+
+function handleSubmit(objName,theHost,siteID)
+{if(!siteID)
+siteID=0;var isV3=isEncodingEnabled();if(isV3)
+{return encodeUrl(theHost,objName,siteID);}
+else
+{return true;}}
+
+// \include\js\popout\promo_popout_mediaplex.js@@\main\27 
+
+var bPopUpWindow=true,winPopped=false;var platform=navigator.platform.toLowerCase();var surveyCookie="surveySays";var surveyValue="shown";var surveyTempPopupFile="popout/temp_survey_popup.html";function eBayIsIE4()
+{var agent=navigator.userAgent.toLowerCase();var is_ie=(agent.indexOf("msie")!=-1);var minor=is_ie?parseFloat(agent.substring(agent.indexOf('msie')+5)):parseFloat(navigator.appVersion);var isie4=parseInt(minor)==4;return isie4;}
+function setPopOutSwitch(bOnOrOff,myfunction)
+{bPopUpWindow=bOnOrOff;}
+function popupWindow(mypage,target,w,h,scroll,no,pLeft,pTop,params){if(target=="_self")
+return false;LeftPosition=(screen.width)?(screen.width-w)/2:0;TopPosition=(screen.height)?(screen.height-h)/2:0;if(pLeft)
+LeftPosition=pLeft;if(pTop)
+TopPosition=pTop;settings='height='+h+',width='+w+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable='+no+'';top.win=window.open(mypage,target,settings+","+params);winPopped=true;return false;}
+function checkHome(){var valueOfCheckHome=false;var agt=navigator.userAgent.toLowerCase();var myopera=(agt.indexOf("opera")!=-1);if(eBayIsIE4())
+{return false;}
+if(!myopera&&platform.indexOf('mac')==-1&&typeof(oHomePage)!='undefined')
+{valueOfCheckHome=eval('oHomePage.isHomePage("http://"+document.location.host+"/")');}
+else
+{valueOfCheckHome=false;}
+return valueOfCheckHome;}
+function findForms()
+{var formsArray=document.forms;var i;var strFormSubmit="";for(i=0;i<formsArray.length;i++)
+{strFormSubmit+='<SC'+'RIPT FOR=\"'+formsArray[i].name+'\" EVENT=\"onsubmit\" LANGUAGE=\"JavaScript\">';strFormSubmit+='setPopOutSwitch(false)\;';strFormSubmit+='<\/SC'+'RIPT>';}
+document.write(strFormSubmit);}
+function startCounterCookie(){var now="";var countscookie="";var countcookie="";now=new Date();Year=now.getUTCFullYear();Month=now.getMonth();Day=now.getDate();now=new Date(Year,Month,Day);now.setHours(now.getHours()+24);var x=new EbayDPCookie("dp1",null,null,"/",null,null,true);x.read();countcookie=x.getCookielet("count");if(!countcookie){countcookie=1;}else{countcookie=parseInt(countcookie)+1;}
+x.addCookielet("count",countcookie,now);x.set();testIt();}
+function popOutWindow(pURL,width,height,pSurvey,pSampleRate)
+{if(typeof(width)=='undefined')
+width='275';if(typeof(height)=='undefined')
+width='375';var valueOfCounts=0;var valueOfCheckHome=false;var valueOfKeepMeSignIn=null;var valueOfEbaySignIn=null;if(!pSurvey)
+{valueOfKeepMeSignIn=ReadCookie("keepmesignin");valueOfEbaySignIn=ReadCookie("ebaysignin");valueOfCheckHome=checkHome();var x=new EbayDPCookie("dp1",null,null,"/",null,null,true);x.read();testIt();valueOfCounts=x.getCookielet("count");;}
+testIt();if(bPopUpWindow)
+{if((valueOfCheckHome!=true)&&(valueOfCounts<2))
+{if((valueOfEbaySignIn!="in")&(valueOfKeepMeSignIn!="in"))
+{var notMac=((navigator.userAgent.toLowerCase()).indexOf("mac")==-1);if(pSurvey&&!winPopped&&notMac&&(ReadCookie(surveyCookie)!=surveyValue))
+return showSurveyWindow(pURL,width,height,pSampleRate);else if(!pSurvey)
+return popupWindow(pURL,'SureYouWantToLeave',width,height,'no','yes');}}}}
+function showExitPollSurveyWindow(pURL,pWidth,pHeight)
+{var chn=document.location.hostname;var host="https://web.archive.org/web/20050413183952/http://pages"+chn.substr(chn.indexOf("."));host+="/";var sInd=host.indexOf(".stores.");if(sInd!=-1)
+host=host.substring(0,sInd+1)+host.substring(sInd+8,host.length);pURL=host+surveyTempPopupFile+"?"+pURL;pURL+="&ep=&ts="+new String(new Date())+"&width=600&height=400";var pWin=popupWindow(pURL,'ebSurvey',600,400,'yes','yes','5000','5000');return pWin;}
+function showSurveyWindow(pURL,pWidth,pHeight,pSampleRate)
+{var rnd=Math.floor(Math.random()*10000);if((rnd%3)!=0)
+return false;var reg=ReadCookie("reg");var etfc=ReadCookie("etfc");var uType="A";if(reg=="1")
+{if(etfc=="1")
+uType="C";else if(etfc=="2")
+uType="D";else
+uType="B";}
+pURL+=uType;var chn=document.location.hostname;var host="https://web.archive.org/web/20050413183952/http://pages"+chn.substr(chn.indexOf("."));host+="/";var sInd=host.indexOf(".stores.");if(sInd!=-1)
+host=host.substring(0,sInd+1)+host.substring(sInd+8,host.length);pURL=host+surveyTempPopupFile+"?"+pURL;pURL+="&ts="+new String(new Date())+"&width=600&height=400";var pWin=popupWindow(pURL,'ebSurvey',600,400,'yes','yes','5000','5000');return pWin;}
+function writeClickListener()
+{var agt=navigator.userAgent.toLowerCase();var mymac=(agt.indexOf("mac")!=-1);var myopera=(agt.indexOf("opera")!=-1);if(platform.indexOf('mac')==-1&&!myopera)
+{var string='';string+='<SCR'+'IPT FOR="document" EVENT="onmousedown()" LANGUAGE="JavaScript">';string+='var eventTag = window.event.srcElement.tagName.toLowerCase();';string+='if(eventTag == "a" || eventTag == "img" || eventTag == "area" || eventTag == "input")';string+='{';string+='setPopOutSwitch(false)\;';string+='}';string+='<\/SC'+'RIPT>';string+='<SCR'+'IPT FOR="document" EVENT="onkeypress()" LANGUAGE="JavaScript">';string+='var eventTag = window.event.srcElement.tagName.toLowerCase();';string+='if(eventTag == "input")';string+='{';string+='setPopOutSwitch(false)\;';string+='}';string+='<\/SC'+'RIPT>';document.write(string);}}
+function eBayIsFramed()
+{if(top==self)
+{return false;}
+else
+{return true;}}
+function eBayToolbarPluginDetect()
+{var plugin=false;var mimetype="application/x-eBay-Toolbar-Plugin-Functions";var nsname="eBay Plugin Functions";if(typeof(navigator.mimeTypes)!='undefined'&&navigator.mimeTypes[mimetype]&&navigator.mimeTypes[mimetype].enabledPlugin)
+{if(navigator.plugins)
+plugin=true;}
+else if(navigator.userAgent&&navigator.userAgent.indexOf("MSIE")>=0&&(navigator.userAgent.indexOf("Windows")>=0)){if(eBayIsIE4())
+{return false;}
+else if(typeof(IECheckClient)=="unknown")
+{plugin=IECheckClient();}}
+return plugin;}
+if(eBayToolbarPluginDetect()){setPopOutSwitch(false,"toolbar");}
+if(eBayIsFramed()){setPopOutSwitch(false,"framed");}
+function testIt()
+{}
+var popWinLoaded=true;
+
+// \include\lib\_global\_ui\_base\layer.js@@\main\4 
+
+function EbayHTMLLayer(pParent,pName,pDisabled,pCfg)
+{if(!this.objType)
+this.objType="EbayHTMLLayer";this.base=EbayHTML;this.base(pParent,pName,pName,pDisabled,pCfg);this.aBindEvents=new Array;this.getElem=ebHTMLLayerGetElem;this.getValue=ebHTMLLayerGetValue;this.setValue=ebHTMLLayerSetValue;}
+function ebHTMLLayerGetElem(pName)
+{var s=pName,d=this.oDocument.doc;if(d.getElementById)
+return d.getElementById(s);else if(d.all)
+return d.all(s);this.throwWarning("Not supported","getElem");}
+function ebHTMLLayerGetValue(pIsText)
+{if(this.eElem)
+{if(pIsText)
+return this.eElem.innerText;else
+return this.eElem.innerHTML;}
+else
+return"";}
+function ebHTMLLayerSetValue(pVal,pIsText)
+{if(this.eElem)
+{if(pIsText)
+this.eElem.innerText=pVal;else
+this.eElem.innerHTML=pVal;}}
+
+// \include\lib\_global\_ui\_ex\frame_autosize.js@@\main\9 
+
+function EbayAutoSizeFrame(pParent,pName,pElemId,pDisabled,pConfig)
+{if(!this.objType)
+this.objType="EbayAutoSizeFrame";this.base=EbayHTML;this.base(pParent,pName,pElemId,pDisabled,pConfig);this.AUTOSIZE_WIDTH_MAX_HEIGHT=0;this.AUTOSIZE_HEIGHT_MAX_WIDTH=1;this.AUTOSIZE_WIDTH_HEIGHT=2;this.sContentUrl=this.oConfig.contentUrl;this.sFrameId=pName+"ContentFrame";this.eContentFrame=null;this.eCopyDiv=null;this.frameDoc=null;this.frameWin=null;this.sContentWidth='0px';this.sContentHeight='0px';this.sSizingStrategy=this.oConfig.sizingStrategy||this.AUTOSIZE_WIDTH_HEIGHT;this.bPageLoaded=false;this.bFrameLoaded=false;this.bIssuedRequest=false;this.bCalcDimension=false;this.bProcessing=false;this.getElem=ebAutoSizeFrameGetElem;this.bindHTMLBase=this.bindHTML;this.bindHTML=ebAutoSizeFrameBindHTML;this.onAfterFrameLoad=ebAutoSizeFrameOnAfterFrameLoad;this.onAfterPageLoad=ebAutoSizeFrameOnAfterPageLoad;this.processLoad=ebAutoSizeFrameProcessLoad;this.calcContentDimension=ebAutoSizeFrameCalcContentDimension;this.copyDiv=ebAutoSizeFrameCopyDiv;this.adjustSize=ebAutoSizeFrameAdjustSize;this.writeHtml=ebAutoSizeFrameWriteHtml;this.onBeforeWriteHtml=null;this.getElemHtml=ebAutoSizeFrameGetElemHtml;this.onBeforeUnloadBase=this.onBeforeUnload;this.onBeforeUnload=ebAutoSizeFrameOnBeforeUnload;this.onBeforeResize=null;this.onAfterResize=null;with(this)
+_registerListener(oDocument._getEvent("load"),EVENT_AFTER,"onAfterPageLoad");var oC=this.oGlobals.oClient;if(!(oC.bIE&&oC.iVer>=5)&&!(oC.bNav&&oC.iVer>=7)&&!(oC.bSafari&&oC.iVer>=1)&&!(oC.bOpera&&oC.iVer>=7)&&navigator.userAgent.toLowerCase().indexOf("firefox")==-1)
+{this.enable(false);}}
+function ebAutoSizeFrameOnBeforeUnload()
+{this.onBeforeUnloadBase();if(this.eContentFrame)
+this.eContentFrame.jsObj=null;if(this.frameWin)
+this.frameWin.jsObj=null;}
+function ebAutoSizeFrameGetElem(pName)
+{var el=null,d=this.oDocument.doc;if(d.getElementById)
+{el=d.getElementById(pName);}
+else if(d.all)
+{el=d.all[pName];}
+return el;}
+function ebAutoSizeFrameBindHTML()
+{var oC=ebay.oGlobals.oClient;with(this)
+{bindHTMLBase();if(oC.bIE&&oC.iVer==5)
+{var self=this;var nTimerId=0;checkIfLoadedForIE50=function()
+{var f=self.oDocument.win.frames[self.sFrameId];if(f&&f.document&&f.document.readyState=='complete')
+{self.onAfterFrameLoad();self.oDocument.win.clearInterval(nTimerId);}};nTimerId=oDocument.win.setInterval(checkIfLoadedForIE50,30);}
+oDocument.downgradeDomain();if(eElem&&!bDisabled&&!bIssuedRequest)
+{var htmlStr=this.getElemHtml();if(onBeforeWriteHtml)onBeforeWriteHtml();eElem.innerHTML=htmlStr;eContentFrame=oDocument.doc.getElementById(sFrameId);eContentFrame.jsObj=this;if(eContentFrame.contentWindow)
+{eContentFrame.contentWindow.location.href=sContentUrl;}}
+if(oC.bOpera)
+{if(oC.iVer==7&&oC.fMinorVer<0.5)
+{var self=this;var nTimerId=0;var checkIfLoadedForOpera7x=function()
+{var f=eContentFrame;if(f&&f.contentDocument&&f.contentDocument.readyState=='complete')
+{self.onAfterFrameLoad();self.oDocument.win.clearInterval(nTimerId);}};nTimerId=oDocument.win.setInterval(checkIfLoadedForOpera7x,20);}}}}
+function ebAutoSizeFrameOnAfterFrameLoad()
+{with(this)
+{bFrameLoaded=true;if(bPageLoaded&&!bDisabled)
+{this.processLoad();}}}
+function ebAutoSizeFrameOnAfterPageLoad()
+{with(this)
+{bPageLoaded=true;if(bFrameLoaded&&!bDisabled)
+{this.processLoad();}}}
+function ebAutoSizeFrameProcessLoad()
+{this.calcContentDimension();if(!this.bCalcDimension)
+{var self=this;var tId;var oWin=this.oDocument.win;var checkCalc=function()
+{if(self.bCalcDimension)
+{oWin.clearInterval(tId);self.adjustSize();}};tId=oWin.setInterval(checkCalc,110);}
+else
+{this.adjustSize();}}
+function ebAutoSizeFrameCalcContentDimension()
+{var oC=ebay.oGlobals.oClient;var oCfg=this.oConfig;with(this)
+{oDocument.downgradeDomain();if(oC.bIE)
+{var body;if(oC.iVer==5)
+{frameWin=oDocument.win.frames[sFrameId];frameDoc=frameWin.document;}
+else
+{frameWin=eContentFrame.contentWindow;frameDoc=eContentFrame.contentWindow.document;}
+with(frameDoc.body)
+{if(sSizingStrategy==AUTOSIZE_HEIGHT_MAX_WIDTH)
+{eContentFrame.style.width=sContentWidth='100%';frameDoc.body.scroll='no';var self=this;var fbody=frameDoc.body;oDocument.win.setTimeout(function(){self.sContentHeight=fbody.scrollHeight;self.bCalcDimension=true;},200);bCalcDimension=false;}
+else if(sSizingStrategy==AUTOSIZE_WIDTH_MAX_HEIGHT)
+{eContentFrame.style.height=sContentHeight='100%';frameDoc.body.scroll='no';eContentFrame.style.width='auto';var self=this;var fbody=frameDoc.body;oDocument.win.setTimeout(function(){self.sContentWidth=fbody.scrollWidth;self.bCalcDimension=true;},100);bCalcDimension=false;}
+else
+{frameDoc.body.scroll='no';sContentWidth=parseInt(scrollWidth)+parseInt(leftMargin)+parseInt(rightMargin)+'px';sContentHeight=parseInt(scrollHeight)+parseInt(topMargin)+parseInt(bottomMargin)+'px';var self=this;var fbody=frameDoc.body;oDocument.win.setTimeout(function(){self.sContentHeight=fbody.scrollHeight;self.bCalcDimension=true;},200);bCalcDimension=false;}}}
+else if(oC.bOpera)
+{frameWin=oDocument.win.frames[sFrameId];frameDoc=eContentFrame.contentDocument;eContentFrame.style.visibility='visible';eContentFrame.scrolling='yes';if(sSizingStrategy==AUTOSIZE_HEIGHT_MAX_WIDTH)
+{eContentFrame.style.width='100%';sContentWidth='100%';sContentHeight=frameDoc.body.scrollHeight;var self=this;oDocument.win.setTimeout(function(){self.sContentHeight=self.frameDoc.body.scrollHeight;bCalcDimension=true;},300);bCalcDimension=false;}
+else
+{if(sSizingStrategy==AUTOSIZE_WIDTH_MAX_HEIGHT)
+{eContentFrame.style.height='100%';}
+copyDiv();var self=this;oDocument.win.setTimeout(function()
+{self.sContentWidth=self.eCopyDiv.scrollWidth;frameDoc.body.removeChild(self.eCopyDiv);self.sContentHeight=self.frameDoc.body.scrollHeight;self.bCalcDimension=true;},300);bCalcDimension=false;}}
+else if(eContentFrame&&eContentFrame.contentDocument)
+{frameWin=eContentFrame.contentWindow?eContentFrame.contentWindow:oDocument.win.frames[sFrameId];frameDoc=eContentFrame.contentDocument;if(sSizingStrategy==AUTOSIZE_HEIGHT_MAX_WIDTH)
+{eContentFrame.style.width=sContentWidth='100%';eContentFrame.style.visibility='visible';var fdoc=frameDoc;var self=this;oDocument.win.setTimeout(function(){self.sContentHeight=fdoc.body.scrollHeight;self.bCalcDimension=true;},100);bCalcDimension=false;}
+else if(sSizingStrategy==AUTOSIZE_WIDTH_MAX_HEIGHT)
+{eContentFrame.style.height=sContentHeight='100%';eContentFrame.style.visibility='visible';var fdoc=frameDoc;var self=this;oDocument.win.setTimeout(function(){self.sContentWidth=fdoc.body.scrollWidth;self.bCalcDimension=true;},100);bCalcDimension=false;}
+else
+{eContentFrame.style.visibility='visible';sContentHeight=parseInt(frameDoc.body.scrollHeight)+'px';sContentWidth=parseInt(frameDoc.body.scrollWidth)+'px';bCalcDimension=true;}}
+else
+{enable(false);}}}
+function ebAutoSizeFrameCopyDiv()
+{with(this)
+{var eDiv=this.eCopyDiv=frameDoc.createElement('div');eDiv.innerHTML=frameDoc.body.innerHTML;;frameDoc.body.appendChild(eDiv);eDiv.style.overflow='scroll';if(sSizingStrategy==AUTOSIZE_HEIGHT_MAX_WIDTH)
+{eDiv.style.width='100%';}
+else if(sSizingStrategy==AUTOSIZE_WIDTH_MAX_HEIGHT)
+{eDiv.style.height='100%';}}}
+function ebAutoSizeFrameAdjustSize()
+{with(this)
+{if(frameWin){frameWin.jsObj=this;}
+if(!bDisabled)
+{if(onBeforeResize)this.onBeforeResize();eContentFrame.style.width=sContentWidth;eContentFrame.style.height=sContentHeight;eContentFrame.style.visibility='visible';eContentFrame.scrolling='no';eContentFrame.scroll='no';if(onAfterResize&&!this.bDisabled)this.onAfterResize();}}}
+function ebAutoSizeFrameWriteHtml()
+{with(this)
+{if(!bDisabled&&sContentUrl)
+{var htmlStr=this.getElemHtml();if(onBeforeWriteHtml)onBeforeWriteHtml();this.oDocument.doc.write(htmlStr);eContentFrame=this.oDocument.doc.getElementById(sFrameId);eContentFrame.jsObj=this;if(eContentFrame.contentWindow)
+{eContentFrame.contentWindow.location.replace(sContentUrl);}}
+bIssuedRequest=true;}}
+function ebAutoSizeFrameGetElemHtml()
+{var htmlStr='';with(this)
+{var oC=this.oGlobals.oClient;var iwh=(oC.bIE?'1px':'1px');var visble='hidden';htmlStr+='<iframe  name="'+sFrameId+'" id="'+sFrameId+'"  src="'+sContentUrl+'" marginwidth="0" marginheight="0"  frameborder="0" style="width:'+iwh+';height:'+iwh+';visibility:'+visble+'" onload="{this.jsObj.onAfterFrameLoad();}" ></iframe>';}
+return htmlStr;}
+
+// \include\lib\_global\features\rvi\rvi.js@@\main\7 
+
+function EbayRVI(pParent,pName,pConfig)
+{if(!this.objType)
+this.objType="EbayRVI";this.base=EbayAutoSizeFrame;this.base(pParent,pName,pConfig.rviLayerId,false,pConfig);this.ORIENTATION_HORIZONTAL=0;this.ORIENTATION_VERTICAL=1;this.sSeparator='|';this.sCookieVal=null;this.sSourceCookie=null;this.iNumItems=0;if(!this.oConfig.orientation)
+{this.oConfig.orientation=this.ORIENTATION_HORIZONTAL;}
+this.sLvmCmdUrl=null;this.init=function()
+{if(this.oConfig.orientation==this.ORIENTATION_HORIZONTAL)
+{this.sSizingStrategy=this.AUTOSIZE_HEIGHT_MAX_WIDTH;}
+var val;if((val=this.getCookieVal("dp1","vrvi",true))!=null&&val.length>0&&val.charAt(0)!='0')
+{this.sSourceCookie="vrvi";}
+else if((val=this.getCookieVal("ebay","lvmn"))!=null&&val.length>0&&val.charAt(0)!='0')
+{this.sSourceCookie="lvmn";}
+else if(!this.sSourceCookie&&(val=this.getCookieVal("LVM"))!=null&&val.length>0&&val.charAt(0)!='0')
+{this.sSourceCookie="LVM";}
+if(!this.sSourceCookie)this.enable(false);with(this)
+{sCookieVal=val;parse();if(iNumItems==0)this.enable(false);if(!sContentUrl)genContentUrl();}};this.baseEnable=this.enable;this.enable=function(pEnable)
+{with(this)
+{baseEnable(pEnable);if(eContentFrame)
+{if(bDisabled)
+{eContentFrame.style.display='none';}
+else
+{eContentFrame.style.display='inline';}}}};this.getCookieVal=function(pCName,pClName,pDelimited)
+{var oC=pDelimited?new EbayDPCookie(pCName):new EbayCookie(pCName);if(pClName)oC.isCookielet=true;oC.read();return pClName?oC.getCookielet(pClName):oC.value;}
+this.parse=function()
+{var aVal=this.sCookieVal.split(this.sSeparator);this.iNumItems=parseInt(aVal[0]);}
+this.genContentUrl=function()
+{var lvmHost=this.oConfig.searchHost;if(lvmHost)lvmHost=lvmHost.replace(new RegExp('/*$'),'');var protocol=location.protocol;var htValue=1;if(typeof(ebSelCBObj)!="undefined")
+{if(ebSelCBObj!=null)
+{if(ebSelCBObj.ht!=1)
+{htValue=ebSelCBObj.ht;var cobrandStr=ebSelCBObj.name+".";var c_re=new RegExp(cobrandStr,'g');if(lvmHost)lvmHost=lvmHost.replace(c_re,'');}}}
+var targetHost=(lvmHost?lvmHost:protocol+'//'+"search-lvm"+ebay.oGlobals.oEnvironment.sCountryDomain);targetHost=targetHost.replace(new RegExp('/*$'),'');var htParam="&ht="+htValue;var randomNumber=Math.round(Math.random()*1000);var t=escape(new Date());var randomParam="&cb"+randomNumber+"="+t;var pgname=this.oConfig.rviPageName?'&pageName='+this.oConfig.rviPageName:'';var orient="horizontal";switch(this.oConfig.orientation)
+{case 0:orient="horizontal";break;case 1:orient="vertical";break;}
+var cmdUrl=targetHost+"/ws/eBayISAPI.dll?LastViewedMerchandising"+htParam+randomParam+pgname+'&orientation='+orient;this.sContentUrl=cmdUrl;}
+this.clear=function()
+{with(this)
+{if(!sSourceCookie)return;var oC;switch(sSourceCookie)
+{case"vrvi":oC=new EbayDPCookie("dp1");oC.isCookielet=true;oC.read();oC.addCookielet("vrvi","0"+this.sSeparator+"0");break;case"lvmn":oC=new EbayCookie("ebay");oC.isCookielet=true;oC.addCookielet("lvmn","0"+this.sSeparator+"0");break;case"LVM":oC=new EbayCookie("ebay");oC.read();oC.value="0"+this.sSeparator+"0";break;}
+oC.set();if(oC.bNav&&oC.iVer>=7||navigator.userAgent.toLowerCase().indexOf("firefox")!=-1)
+{var url=location.href;window.location.replace(url);}
+else
+{location.reload();}}}
+this.onBeforeResize=function()
+{with(this)
+{if(frameWin&&frameWin.disableRvi&&frameWin.disableRvi())
+{this.enable(false);}}}
+this.init();this.baseWriteHtml=this.writeHtml;this.writeHtml=function()
+{this.genContentUrl();this.baseWriteHtml();}
+this.base1BindHTML=this.bindHTML;this.bindHTML=function()
+{this.genContentUrl();this.base1BindHTML();}}
+
+// \include\lib\us\features\homepage\main.js@@\main\3 
+
+ebay.oDocument.oPage.onBeforeLoad=function()
+{}
+function ebCreateConfigurations()
+{var c=ebay.oDocument.addConfig(new EbayConfig("rviConfig"));c.rviLayerId="recentlyViewedItemsLayer";c.orientation=0;c.rviPageName="LVMPage_Visitor_Home";c.featuredSect="featuredItemsSection";}
+function ebCreateControls()
+{var cfg=ebay.oDocument._exec("getConfig","rviConfig");if(!cfg)return;var oRvi=new EbayRVI(ebay.oDocument.oPage,"rvi",cfg);oRvi.onAfterResize=function()
+{var eFeatured=this.oDocument.doc.getElementById(cfg.featuredSect);if(eFeatured&&!this.bDisabled)eFeatured.style.display='none';}}
+ebCreateConfigurations();ebCreateControls();
+
+// \include\lib\_global\_ui\_ex\overlay.js@@\main\1 
+
+function EbayHTMLOverlay(pParent,pName,pCfg)
+{if(!this.objType)
+this.objType="EbayHTMLOverlay";this.base=EbayBaseControl;this.base(pParent,pName);this.isSupported=ebIsBrowserSupported;if(!this.isSupported())
+return;this.sPosStyle=pCfg.posStyle||'absolute';this.sWidth=pCfg.width||'450';this.sHeight=pCfg.height||'450';this.sTop=pCfg.top;this.sLeft=pCfg.left;this.sLayerHTML=pCfg.layerHTML;this.sContentDiv=pCfg.contentDiv||'overlayContent';this.bCustomHTML=pCfg.customHTML||false;this.bTransparent=pCfg.transparent||false;this.defaultLayout=ebHTMLOverlayDefaultLayout;this.getGUILayer=ebHTMLOverlayGetGUILayer;this.setPosition=ebHTMLOverlaySetPosition;this.centerTop=ebHTMLOverlayCenterTop;this.centerLeft=ebHTMLOverlayCenterLeft;this.setContent=ebHTMLOverlaySetContent;this.closeOverlay=ebHTMLOverlayCloseOverlay;this.showHide=ebHTMLOverlayShowHide;this.createControl=ebHTMLOverlayCreateControl;this.onBeforeDisplay=null;this.onAfterDisplay=null;this.onBeforeClose=null;this.onAfterClose=null}
+function ebHTMLOverlayCreateControl()
+{with(this)
+{new EbayHTMLLayer(this,name);var l='<div id="'+name+'" style="display:block; position:'+sPosStyle+';';if(sPosStyle=='absolute')
+l+=' left:0px; top:0px;';l+=' z-index:100">';l+='</div>';oDocument.write(l);}}
+function ebHTMLOverlayDefaultLayout()
+{var s='';with(this)
+{s+='<table width="'+sWidth+'" height="'+sHeight+'" cellspacing="0" cellpadding="0" ';s+='style="border-collapse:collapse;border-color:#000000;background-color:#FFFFFF;" border="1">';s+='<tr><td valign="top"><div id="'+sContentDiv+'"></div></td>';s+='</tr></table>';}
+return s;}
+function ebHTMLOverlayGetGUILayer()
+{with(this)
+{var guiHTML;if(typeof(sLayerHTML)!='undefined')
+guiHTML=sLayerHTML;else
+guiHTML=defaultLayout();var lObj=controls[name];if(lObj)
+lObj.setValue(guiHTML);}}
+function ebHTMLOverlaySetPosition()
+{with(this)
+{var lObj=controls[name];if(lObj)
+{var e=lObj.getElem(name);e.style.top=sTop||centerTop();e.style.left=sLeft||centerLeft();}}}
+function ebHTMLOverlayCenterTop()
+{var winHeight=document.body.clientHeight;var cL=this.oGlobals.oClient;if(!cL.bIE)
+winHeight=window.innerHeight;var s=winHeight/2-this.sHeight/2;this.sTop=s;return s;}
+function ebHTMLOverlayCenterLeft()
+{var winWidth=document.body.clientWidth;var cL=this.oGlobals.oClient;if(!cL.bIE)
+winHeight=window.innerWidth;var s=winWidth/2-this.sWidth/2;this.sLeft=s;return s;}
+function ebHTMLOverlaySetContent(pContent)
+{with(this)
+{if(onBeforeDisplay)
+onBeforeDisplay();var lObj=controls[name];if(lObj)
+{var e=lObj.getElem(sContentDiv);if(e)
+e.innerHTML=pContent;}
+if(onAfterDisplay)
+onAfterDisplay();}}
+function ebHTMLOverlayCloseOverlay()
+{with(this)
+{if(onBeforeClose)
+onBeforeClose();var lObj=controls[name];if(lObj)
+lObj.setValue('&nbsp;');if(onAfterClose)
+onAfterClose();}}
+function ebHTMLOverlayShowHide(pShow)
+{with(this)
+{var dStyle=pShow?'block':'none';var l=controls[name];if(l)
+{var e1=l.getElem(name);if(e1&&e1.style)
+e1.style.display=dStyle;}}}
+function ebIsBrowserSupported()
+{var cL=this.oGlobals.oClient;var bNS4=document.layers;if(bNS4||(cL.bMac&&!cL.bMacppc))
+return false;return true;}
+
+// \include\lib\_global\_ui\_ex\overlay_content.js@@\main\1 
+
+function EbayHTMLOverlayContent(pParent,pName,pCfg)
+{if(!this.objType)
+this.objType="EbayHTMLOverlayContent";this.base=EbayHTMLOverlay;this.base(pParent,pName,pCfg);if(!this.isSupported)
+return null;this.bUseIfShim=pCfg.useIfShim||false;this.sContent=pCfg.contentHTML;this.sLayerUI=pCfg.layerHTML;this.createBaseControl=this.createControl;this.hide=this.closeOverlay;this.setIframeShim=ebHTMLOverlayContentSetIframeShim;this.display=ebHTMLOverlayContentDisplay;var cl=this.oGlobals.oClient;if(this.bUseIfShim)
+{if(!cl.bIE||cl.bMac)
+this.bUseIfShim=false;}
+this.createBaseControl();}
+function ebHTMLOverlayContentDisplay()
+{with(this)
+{getGUILayer();if(sPosStyle=='absolute')
+setPosition();showHide(true);setContent(sContent);if(bUseIfShim)
+setIframeShim();oDocument.bind();}}
+function ebHTMLOverlayContentSetIframeShim()
+{with(this)
+{var d=oDocument.doc;var e,af,lObj=controls[name];if(lObj)
+e=lObj.getElem(name);if(sPosStyle=='relative')
+af=e.firstChild;else
+af=e;var w=af.offsetWidth,h=af.offsetHeight;var f=d.createElement('IFRAME');f.style.position='absolute';f.style.top=sPosStyle=='relative'?'20px':'5px';f.style.zIndex='-1';f.style.width=w;f.style.height=h*0.9;f.frameBorder='0';af.appendChild(f);}}
+
+// \include\lib\_global\_ui\_base\anchor.js@@\main\e403_caboose\0 
+
+function EbayHTMLAnchor(pParent,pName,pDisabled,pCfg)
+{if(!this.objType)
+this.objType="EbayHTMLAnchor";this.base=EbayHTML;this.base(pParent,pName,pName,pDisabled,pCfg);this.getElem=ebHTMLAnchorGetElem;this.subscribeEvents("onclick",'onmouseover','onmouseout');}
+function ebHTMLAnchorGetElem(pName)
+{var d=this.oDocument.doc,l=null;l=d.links[pName];if(l)return l;if(d.all)
+l=d.all[pName];if(l)return l;if(d.getElementById)
+l=d.getElementById(pName);if(l)return l;if(d.layers)
+{var lyrs=d.layers;var len=lyrs.length;for(var i=0;i<len;i++)
+{l=this.getElem(lyrs[i].document,pName);if(l)
+return l;}}
+for(var j=0;j<d.links.length;j++)
+{l=d.links[j];if(typeof(l.name)=="undefined")
+{if(l.onclick)
+{var oc=l.onclick.toString();if(oc.indexOf("{#"+pName+"#}")!=-1)
+return l;}}
+else
+{if(l.name==pName)
+return l;}
+l=null;}
+return l;}
+function setEbayLink(pS)
+{return true;}
+
+// \include\lib\_global\_ui\_base\radio.js@@\main\3 
+
+function EbayHTMLRadio(pParent,pName,pDisabled,pCfg)
+{if(!this.objType)
+this.objType="EbayHTMLRadio";this.base=EbayHTML;this.base(pParent,pName,pName,pDisabled,pCfg);this.getElem=ebHTMLRadioGetElem;this.bindHTML=ebHTMLRadioBindHTML;this.bindEvents=ebHTMLRadioBindEvents;this.selectByIndex=ebHTMLRadioSelectByIndex;this.selectByValue=ebHTMLRadioSelectByValue;this.getValue=ebHTMLRadioGetValue;this.isGroup=false;this.onBeforeCheck=null;this.onAfterCheck=null;this.subscribeEvents("onclick");}
+function ebHTMLRadioGetElem(pName)
+{return this.oDocument.getFormElem(pName,"radio");}
+function ebHTMLRadioBindHTML()
+{with(this)
+{eElem=getElem(sElemName);if(eElem)
+{if(eElem.length&&eElem.length>0)
+{this.isGroup=true;for(var i=0;i<eElem.length;i++)
+eElem[i].jsObj=this;}
+else
+{this.isGroup=false;eElem.jsObj=this;}}
+if(bDisabled)
+this.enable(false);}}
+function ebHTMLRadioBindEvents()
+{with(this)
+{if(!eElem)
+return;var e=aBindEvents,len=e.length,fStr;for(var i=0;i<len;i++)
+{if(eElem.length&&eElem.length>0)
+{for(var ii=0;ii<eElem.length;ii++)
+eval("eElem[ii]."+e[i]+" = new Function( this.bindEventString(e[i]) )");}
+else
+{eval("eElem."+e[i]+" = new Function(this.bindEventString(e[i]))");}}}}
+function ebHTMLRadioSelectByIndex(pIdx)
+{if(this.onBeforeCheck)
+this.onBeforeCheck();var e=this.eElem;if(this.isGroup)
+e=this.eElem[pIdx];if(e)
+{e.checked=true;if(this.onAfterCheck)
+this.onAfterCheck();}}
+function ebHTMLRadioSelectByValue(pVal)
+{if(this.onBeforeCheck)
+this.onBeforeCheck();var e=this.eElem;if(this.isGroup)
+{for(var i=0;i<e.length;i++)
+{if(e[i].value==pVal)
+{e[i].checked=true;if(this.onAfterCheck)
+this.onAfterCheck();return;}}}
+else
+{if(e.value==pVal)
+{e.checked=true;if(this.onAfterCheck)
+this.onAfterCheck();}}}
+function ebHTMLRadioGetValue()
+{var e=this.eElem;if(this.isGroup)
+{for(var i=0;i<e.length;i++)
+{if(e[i].checked)
+return e[i].value;}}
+else
+{if(e.checked)
+return e.value;}
+return"";}
+
+// \include\lib\_global\_ui\_base\checkbox.js@@\main\3 
+
+function EbayHTMLCheckbox(pParent,pName,pDisabled,pCfg)
+{if(!this.objType)
+this.objType="EbayHTMLCheckbox";this.base=EbayHTML;this.base(pParent,pName,pName,pDisabled,pCfg);this.check=ebHTMLCheckboxCheck;this.isChecked=ebHTMLCheckboxIsChecked;this.setValue=ebHTMLCheckboxSetValue;this.getValue=ebHTMLCheckboxGetValue;this.subscribeEvents("onclick");this.onBeforeCheck=null;this.onAfterCheck=null;}
+function ebHTMLCheckboxCheck(pChecked)
+{if(this.onBeforeCheck)
+this.onBeforeCheck();if(this.eElem)
+{this.eElem.checked=pChecked;if(this.onAfterCheck)
+this.onAfterCheck();}
+else
+this.throwError("Element '"+this.sElemName+"' does not exist on the page","check");}
+function ebHTMLCheckboxIsChecked()
+{if(this.eElem)
+return this.eElem.checked;return false;}
+function ebHTMLCheckboxSetValue(pVal)
+{var e=this.eElem;if(e)
+{if(typeof(pVal)=="undefined")
+return e.value;else
+e.value=pVal;}}
+function ebHTMLCheckboxGetValue()
+{var e=this.eElem;if(e)
+return e.value;return"";}
+
+// \include\lib\_global\_ui\_base\button.js@@\main\2 
+
+function EbayHTMLButton(pParent,pElemName,pDisabled,pCfg)
+{if(!this.objType)
+this.objType="EbayHTMLButton";this.base=EbayHTML;this.base(pParent,pElemName,pElemName,pDisabled,pCfg);this.subscribeEvents("onclick");}
+
+// \include\lib\_global\features\site_pref\cookie.js@@\main\3 
+
+function EbayUSPCookie()
+{this.TEMP_REDIRECT='1';this.PERM_REDIRECT='2';this.CANCEL_REDIRECT='3';this.sCurrentSiteID=null;this.sTargetSiteID=null;this.sTimeStamp=null;this.iCounter=0;this.iDisplayMode=0;this.bShowUSP=false;this.bFlLayer=false;this.bTempRedirect=false;this.bPermRedirect=false;this.bIncreaseCounter=false;this.bOnlySiteCookie=false;this.setCookieParams=ebUSPCookieSetCookieParams;this.incrementCounter=EbayUSPCookieIncrementCounter;this.setDisplayMode=ebUSPCookieSetDisplayMode;this.setCurrentSite=ebUSPCookieSetCurrentSite;this.writeSpref=ebUSPCookieWriteSpref;this.setCookieParams();}
+function ebUSPCookieSetCookieParams()
+{with(this)
+{var sDp1=new EbayDPCookie("dp1",null,null,"/",null,null,true);sDp1.read();var val=sDp1.getCookielet('spref');if(val&&val!="")
+{var a=val.split('.');if(a.length==5)
+{sCurrentSiteID=a[0];sTimeStamp=a[1];iCounter=a[2];iDisplayMode=a[3];sTargetSiteID=a[4];switch(iDisplayMode)
+{case"1":bFlLayer=bShowUSP=true;break;case"2":bTempRedirect=bShowUSP=true;break;case"3":bPermRedirect=bShowUSP=true;break;}
+writeSpref();}}}}
+function EbayUSPCookieIncrementCounter()
+{this.iCounter++;}
+function ebUSPCookieSetDisplayMode(pDM)
+{this.iDisplayMode=pDM;}
+function ebUSPCookieSetCurrentSite(pSite)
+{this.sCurrentSiteID=pSite;}
+function ebUSPCookieWriteSpref()
+{with(this)
+{var c=sCurrentSiteID;if(bIncreaseCounter)
+incrementCounter();if(!bOnlySiteCookie)
+{c+='.';c+=sTimeStamp+'.';c+=iCounter;}
+var now=new Date();Year=now.getUTCFullYear();Month=now.getMonth();Day=now.getDate();now=new Date(Year,Month,Day);now.setHours(now.getHours()+24);var sDp1=new EbayDPCookie("dp1",null,null,"/",null,null,true);sDp1.read();sDp1.addCookielet('spref',c,now);sDp1.set();}}
+
+// \include\lib\_global\features\site_pref\main.js@@\main\5 
+
+function EbayUSP(pParent,pName)
+{if(!this.objType)
+this.objType="EbayUSP";this.base=EbayBaseControl;this.base(pParent,pName);var cl=this.oGlobals.oClient;if(cl.bOpera||cl.bMac)
+return;this.sOCName='oc_'+this.name;this.oConfig=null;this.sContentDiv='uspContent';this.sRedirectVal='R';this.bShowUSP=false;this.aTokenizedContent=new Array;this.aTokenContentDiv=new Array;this.oSpref=null;this.sRetType=null;this.oSiteCatalystConfig=null;this.getLayerHTML=ebUSPGetLayerHTML;this.getLayerConfig=ebUSPLayerConfig;this.displayUSP=ebUSPDisplayUSP;this.hideUSP=ebUSPHideUSP;this.backToSite=ebUSPBackToSite;this.msgRedirected=ebUSPMsgRedirected;this.visitSiteLink=ebUSPVisitSiteLink;this.createControl=ebUSPCreateControl;this.createUIControls=ebUSPCreateUIControl;this.clickContinue=ebUSPclickContinue;this.learnMore=ebUSPLearnMore;this.cancel=ebUSPCancel;this.closeLayer=ebUSPCloseLayer;this.getRedirectUrl=ebUSPGetRedirectUrl;this.siteIdIndex=ebUSPSiteIdIndex;this.getControl=ebUSPGetControl;this.parseMessages=ebUSPParseMessages;this.modifyContent=ebUSPModifyContent;this.getFlLeftPos=ebUSPGetFlLeftPos;this.resetRedirectLayer=ebUSPResetRedirectLayer;this.createSiteCatalystConfig=ebUSPCreateSiteCatalystConfig;this.getSiteCatalystStr=ebUSPGetSiteCatalystStr;this.setPagenameRequest=ebUSPSetPagenameRequest;this.createControl();}
+function ebUSPCreateControl()
+{with(this)
+{oSpref=new EbayUSPCookie();bShowUSP=oSpref.bShowUSP;var cfg=ebay.oDocument._exec("getConfig","uspConfig");if(!cfg)return;oConfig=cfg;if(!bShowUSP)
+{resetRedirectLayer();return;}
+if(oSpref.bFlLayer)
+{resetRedirectLayer();var ocCfg=getLayerConfig();new EbayHTMLOverlayContent(parent,sOCName,ocCfg);}
+var e=oDocument._getEvent("load");_registerListener(e,EVENT_BEFORE,"createUIControls");_registerListener(e,EVENT_AFTER,"displayUSP");}}
+function ebUSPCreateUIControl()
+{with(this)
+{if(oSpref.bFlLayer)
+{new EbayHTMLRadio(this,oConfig.selCountry);new EbayHTMLCheckbox(this,oConfig.chkAutodirect);var b=new EbayHTMLButton(this,'continue');b._registerEvent("onclick","this.parent.clickContinue();");var l=new EbayHTMLAnchor(this,oConfig.learnMore);l._registerEvent("onclick","this.parent.learnMore();");var a=new EbayHTMLAnchor(this,oConfig.closeImg);a._registerEvent("onclick","this.parent.closeLayer();");var c=new EbayHTMLAnchor(this,oConfig.anchorCancel);c._registerEvent("onclick","this.parent.cancel();");oSiteCatalystConfig=createSiteCatalystConfig();}
+else if(oSpref.bTempRedirect)
+{var a=new EbayHTMLAnchor(this,'msgBackToLink');a._registerEvent("onclick","this.parent.backToSite();");}
+else if(oSpref.bPermRedirect)
+{var a=new EbayHTMLAnchor(this,'msgRedirectedLink');a._registerEvent("onclick","this.parent.msgRedirected();");var a1=new EbayHTMLAnchor(this,'msgVisitSiteLink');a1._registerEvent("onclick","this.parent.visitSiteLink();");}
+parseMessages();}}
+function ebUSPLayerConfig()
+{with(this)
+{var c=new EbayConfig('tmp');c.top="90";c.left=getFlLeftPos();c.useIfShim=true;c.contentDiv=sContentDiv;c.layerHTML=getLayerHTML();c.contentHTML=oConfig.flHTML;return c;}}
+function ebUSPCreateSiteCatalystConfig()
+{var c=new EbayConfig("scConfig");c.close='X';c.learnMore='L';c.btnContinue='C'
+c.cancel='D';c.redirect='R';c.nonRedirect='NR';c.permanent='P';c.nonPermanent='NP';return c;}
+function ebUSPGetLayerHTML()
+{var s='';s+='<form name="flForm"><table width="400" cellspacing="0" cellpadding="0" border="0" ';s+='<tr><td><div id="'+this.sContentDiv+'"></div></td></tr></table></form>';return s;}
+function ebUSPDisplayUSP()
+{with(this)
+{if(!bShowUSP)return;if(oSpref.bFlLayer)
+{var c=parent.controls[sOCName];if(c)c.display();}
+else
+{var e1=oDocument.doc.getElementById(oConfig.redirectLayerId);if(e1)
+{e1.innerHTML=oConfig.redirectHTML;e1.style.position='relative';e1.style.top="-15px";}}
+modifyContent();}}
+function ebUSPHideUSP(pI)
+{with(this)
+{if(pI)
+oSpref.bIncreaseCounter=true;oSpref.writeSpref();var c=parent.controls[sOCName];if(c)c.hide();}}
+function ebUSPclickContinue()
+{with(this)
+{var sel=getControl(oConfig.selCountry);var chk=getControl(oConfig.chkAutodirect);var d=oDocument;var r=sel.getValue()=="R"?true:false;var c=chk.isChecked();var s=oSpref;var oSC=oSiteCatalystConfig;if(r)
+{if(c)
+{s.bOnlySiteCookie=true;s.setCurrentSite(s.sTargetSiteID);sRetType=s.PERM_REDIRECT;s.writeSpref();}
+else
+sRetType=s.TEMP_REDIRECT;var u=getRedirectUrl();if(oSC)
+u+='&ssPageName='+getSiteCatalystStr(oSC.btnContinue,oSC.redirect,c?oSC.permanent:oSC.nonPermanent);d.redirect(u);}
+else
+{if(c)
+{s.bOnlySiteCookie=true;s.setCurrentSite(oConfig.currentSiteId);}
+hideUSP(false);if(oSC)
+{var p=getSiteCatalystStr(oSC.btnContinue,oSC.nonRedirect,c?oSC.permanent:oSC.nonPermanent);setPagenameRequest(p);}}}}
+function ebUSPCloseLayer()
+{with(this)
+{hideUSP(true);var c=oSiteCatalystConfig;var p=getSiteCatalystStr(c.close,c.nonRedirect,c.nonPermanent);setPagenameRequest(p);}}
+function ebUSPLearnMore()
+{with(this)
+{var d=oDocument.doc,e;e=d.getElementById('headerInfo');if(e)
+{e.innerHTML=oConfig.learnMoreText
+e=d.getElementById('learnMoreLink');if(e)
+e.innerHTML='&nbsp;';var c=oSiteCatalystConfig;var p=getSiteCatalystStr(c.learnMore,c.nonRedirect,c.nonPermanent);setPagenameRequest(p);}}}
+function ebUSPCancel()
+{with(this)
+{var s=oSpref;s.setCurrentSite(oConfig.currentSiteId);s.bOnlySiteCookie=true;s.writeSpref();hideUSP();var c=oSiteCatalystConfig;var p=getSiteCatalystStr(c.cancel,c.nonRedirect,c.permanent);setPagenameRequest(p);}}
+function ebUSPBackToSite()
+{with(this)
+{var d=oDocument;var u=oConfig.targetURL[siteIdIndex(oSpref.sTargetSiteID)];d.redirect(u);}}
+function ebUSPMsgRedirected()
+{with(this)
+{var d=oDocument;sRetType=oSpref.CANCEL_REDIRECT;d.redirect(getRedirectUrl());}}
+function ebUSPVisitSiteLink()
+{with(this)
+{var d=oDocument;var u=oConfig.targetURL[siteIdIndex(oSpref.sTargetSiteID)];u+='?redir=0';d.redirect(u);}}
+function ebUSPGetControl(pControl)
+{return this.controls[pControl]||null;}
+function ebUSPGetRedirectUrl()
+{with(this)
+{var tSiteId=oSpref.sTargetSiteID;var index=siteIdIndex(tSiteId);var tUrl=oConfig.targetURL[index];var s=tUrl+'?rtype='+sRetType;s+='&from='+oConfig.currentSiteId;s+='&segment='+oConfig.segment;return s;}}
+function ebUSPSiteIdIndex(pSite)
+{var a=this.oConfig.countryIds;for(var i=0;i<a.length;i++)
+{if(a[i]==pSite)
+return i;}}
+function ebUSPParseMessages()
+{with(this)
+{var c=oConfig;var ts=oSpref.sTargetSiteID,cs=c.currentSiteId;var tsn='eBay '+c.countryNames[siteIdIndex(ts)];var csn='eBay '+c.countryNames[siteIdIndex(cs)];var a=aTokenizedContent,a1=aTokenContentDiv;if(oSpref.bFlLayer)
+{a=[c.msgRemind,c.targetSiteName,c.currentSiteName];a1=['msgRemind','targetSiteName','currentSiteName'];}
+else if(oSpref.bTempRedirect)
+{a=[c.msgBackTo];a1=['msgBackTo'];}
+else if(oSpref.bPermRedirect)
+{a=[c.msgRedirected,c.msgVisitSite];a1=['msgRedirected','msgVisitSite'];}
+for(var i=0;i<a.length;i++)
+{if(a[i].indexOf('#1')!='-1')
+a[i]=a[i].replaceTokensEx('#1#',tsn);if(a[i].indexOf('#2')!='-1')
+a[i]=a[i].replaceTokensEx('#2#',csn);}
+aTokenizedContent=a,aTokenContentDiv=a1;c.learnMoreText=c.learnMoreText.replaceTokensEx('#1#',tsn).replaceTokensEx('#2#',csn);}}
+function ebUSPModifyContent()
+{with(this)
+{var e,d=oDocument.doc,c=oConfig;var a=aTokenizedContent,a1=aTokenContentDiv;for(var i=0;i<a.length;i++)
+{e=d.getElementById(a1[i]);if(e)
+e.innerHTML=a[i];}
+if(!oSpref.bFlLayer)
+oDocument.bind();}}
+function ebUSPGetFlLeftPos()
+{with(this)
+{var l,b=oDocument.doc.body;if(oSpref.bFlLayer)
+l=(b.scrollWidth-760)/2+120;else
+l=(b.scrollWidth-760)/2;return l;}}
+function ebUSPResetRedirectLayer()
+{var e,d=this.oDocument.doc;e=d.getElementById(this.oConfig.redirectLayerId);var env=this.oGlobals.oEnvironment;var img='<img src="'+env.sPicsDir+'s.gif" width="1" height="1" />';if(e)if(e)e.innerHTML=img;}
+function ebUSPGetSiteCatalystStr(pA,pR,pP)
+{var sp='SITEPREF',s;var c=this.oConfig;s=sp;s+=':'+pA;s+=':'+pR;s+=':'+pP;s+=':'+c.currentSiteId;s+=':'+this.oSpref.sTargetSiteID;return s;}
+function ebUSPSetPagenameRequest(pPN)
+{var un='undefined';if(typeof(pageName)!=un)
+{var tmp=pageName;pageName=pPN;if(typeof(ssDoRequest)!=un)
+ssDoRequest();pageName=tmp;}}
+new EbayUSP(ebay.oDocument.oPage,"usp");
+
+// \include\lib\_global\_ui\_ex\rtm.js@@\main\4 
+
+function EbayRTM(pParent,pId,pDefUrl,pW,pH,pType)
+{if(!this.objType)
+this.objType="EbayRTM";this.base=EbayBaseControl;this.base(pParent,this.name);this.name="rtm_"+pId;this.config=new ebRTMConfig(pParent,pId,pDefUrl,pW,pH,pType);this.writeILayer=ebWriteRTMLayer;this.writeIFrame=ebWriteRTMFrame;}
+function ebRTMConfig(pParent,pId,pDefUrl,pW,pH,pType)
+{this.base=EbayConfig;this.base('rtm_'+pId);this.divname="div_"+pId;this.id=pId;this.defUrl=pDefUrl;this.defAdUrl="";this.w=(pDefUrl==null?1:pW);if(this.w<=1)
+this.w="100%";this.h=(pDefUrl==null?1:pH);this.type=pType||0;this.collapsed=pDefUrl==null||pW<=1||pH<=1?true:false;this.setIFContent=ebSetIFRTMContent;this.getIFContent=ebGetIFRTMContent;this.getIFHTML=ebGetIFRTMHTML;this.setILContent=ebSetILRTMContent;this.ifResize=ebIFResize;}
+function ebWriteRTMFrame()
+{var cfg=this.config;var f="",d=this.oDocument;var xsrc=this.oGlobals.oEnvironment.sPicsDir+'spacer.gif';f+='<div id="'+cfg.divname+'">';f+='<img src="'+xsrc+'" height="'+cfg.h+'" width="'+cfg.w+'" border="0">';f+='</div>';d.write(f);var l=new EbayHTMLLayer(ebay.oDocument.oPage,cfg.divname);l.bind();}
+function ebGetIFRTMHTML(pUrl)
+{with(this)
+{var f="";f+='<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"';f+=' id="'+name+'"';f+=' name="'+name+'"';f+=' src="'+pUrl+'"';f+=' width="'+w+'" height="'+h+'"';f+='>';f+='</iframe>';return f;}}
+function ebSetIFRTMContent(pUrl)
+{var d=ebay.oDocument,ifUrl="",cType=0;var oP=d.oPage;if(typeof(oP.controls[this.divname])!='undefined')
+{var aUrlType=ebGetRTMUrlNType(pUrl);var ifUrl=aUrlType[0],cType=aUrlType[1];if(cType==0)
+{oP.controls[this.divname].setValue(this.getIFHTML(ifUrl));}
+else if(cType==1)
+{this.type=cType;oP.controls[this.divname].setValue(ifUrl);}}}
+function ebGetIFRTMContent(pName)
+{var d=ebay.oDocument,eF=top.frames[pName],retStr;if(typeof(eF)!='undefined')
+{if(typeof(eF.document)=='object')
+return eF.document.body.innerHTML;}}
+function ebIFResize(pW,pH)
+{var d=ebay.oDocument,eF=d.doc.getElementById(this.name);if(typeof(eF)!='undefined')
+{eF.style.width=pW+'px';eF.style.height=pH+'px';}}
+function ebWriteRTMLayer()
+{var cfg=this.config;var l="",d=this.oDocument;l='<ILAYER id="'+cfg.name+'" visibility="show" width="';l+=cfg.w+'" height="'+cfg.h+'"></ILAYER>';d.write(l);}
+function ebSetILRTMContent(pUrl,pSize)
+{var eL=document.layers[this.name];if(typeof(eL)=='undefined')
+return;var l="";var aUrlType=ebGetRTMUrlNType(pUrl);var ilUrl=aUrlType[0],cType=aUrlType[1];if(cType==0)
+{if(pUrl.is('-1'))pUrl=this.defUrl;l+='<LAYER SRC="'+pUrl+'" width="'+this.w+'" height="'+this.h+'" ';l+='onLoad="moveToAbsolute('+this.name+'.pageX,'+this.name+'.pageY);';l+='clip.height='+this.h+';clip.width='+this.w+';';l+=' visibility=\'show\';"></LAYER>';document.write(l);}
+else if(cType==1)
+{this.type=cType;var lW=this.w,lH=this.h;if(typeof(pSize)!='undefined')
+{lW=pSize.indexOf(":")!=-1?pSize.split(":")[0]:lW;lH=pSize.indexOf(":")!=-1?pSize.split(":")[1]:lH;}
+l+='<layer onload="moveToAbsolute('+this.name+'.pageX,'+this.name+'.pageY);" ';l+='width="'+lW+'" height="'+lH+'">'+ilUrl+'</layer>';document.write(l);}}
+function ebGetRTMUrlNType(pUrl)
+{var retArray=new Array("",0);if(pUrl&&pUrl.indexOf('*t*')!=-1)
+retArray=pUrl.split('*t*');else if(typeof(pUrl)!='undefined')
+retArray[0]=pUrl;return retArray;}
+function isValidContent(pStr)
+{if(pStr==null||typeof(pStr)=='undefined')
+return false;var pageNotFound='The page cannot be found';var pageCannotBeDisplayed='The page cannot be displayed';if(pStr.hasAny(pageNotFound,pageNotFound))
+return false;return true;}
+
+// \include\lib\_global\features\rtm\placement.js@@\main\e403_caboose\0 
+
+if(typeof(oAdManager)=="undefined")
+var oAdManager=new EbayAdManager();function EbayRTMPlacement(pParent,pName)
+{if(!this.objType)
+this.objType="EbayRTMPlacement";this.base=EbayBaseControl;this.base(pParent,pName);this.rtms=new Array;this.register=ebRegisterRTM;this.delimiter="*t*";this.timeoutID=0;this.rdUrl="";var oC=ebay.oDocument.oPage.oConfig;var un='undefined';this.disableRTM=(typeof(oC.disableRTM)!=un)?oC.disableRTM:false;this.writePlacement=function(pId,pAdCfg,pDefUrl,pType)
+{var c=pAdCfg;if(!c||c.objType!="EbayAdConfig")
+return;if(this.disableRTM)
+return;var defAd=new EbayAd(ebay,c.name,c,oAdManager);defAd.setCountryGlobals=setAdCountryGlobals;defAd.setCountryLocals=setAdCountryLocals;defAd.setCountryGlobals(defAd.globals);defAd.globals.resetGlobals();defAd.setCountryLocals(defAd.config);var gb=defAd.globals;var adParams=c.getAdParamString(gb,defAd.ord);var defAdUrl=gb.iframeUrl+adParams;pDefUrl=pDefUrl?pDefUrl:defAdUrl;var p=new EbayRTM(pParent,pId,pDefUrl,c.width,c.height,pType);p.config.defAdUrl=defAdUrl;this.register(p.config);if(document.layers)
+p.writeILayer();else
+p.writeIFrame();}
+this.getRTMContent=function(pCfg)
+{if(this.disableRTM)
+return;if(pCfg)
+{var path,rHost,id,l;var timeout=0;var qs=document.location.search;var qi=qs.indexOf("i=");with(pCfg)
+{if(typeof(rtmEngineHost)!=un&&!rtmEngineHost.is(''))
+rHost=rtmEngineHost;if(typeof(userId)!=un&&!userId.is(''))
+id=userId;else if(qi!=-1)
+{var ci=qs.indexOf(";");if(ci!=-1)
+id=qs.substring(qi+2,ci);else
+id=qs.substring(qi+2);}
+else if(typeof(login)!=un&&!login.is(''))
+l=login;else if(typeof(u1p)!=un&&!u1p.is(''))
+{var u1pd=u1p.decodeBase64().decodeUTF8();if(!u1pd.has('@@__@@__@@'))
+l=u1pd;}}
+if(typeof(pCfg.timeout)!=un)
+timeout=pCfg.timeout;if(typeof(rHost)==un)
+return;if(this.rtms.length==0)
+return;var pids=this.collectPids(this.rtms);var params=(pCfg.params)?pCfg.params:"";path=rHost+pids+params;if(typeof(id)!=un)
+path+="&i="+id;else if(typeof(l)!=un)
+path+="&l="+l;var d=this.oDocument,g=this.oGlobals;path+="&ord="+(new Date()).getTime();this.rdUrl=(typeof(pCfg.rdUrl)!=un)?pCfg.rdUrl:"";var sTimout="";if(!this.rdUrl.is("")&&timeout>0)
+sTimeout="document.location.replace('"+this.rdUrl+"')";else
+{var rtmArr="";for(var i=0;i<this.rtms.length;i++)
+rtmArr+="-1,";rtmArr=(rtmArr!="")?rtmArr.substr(0,rtmArr.length-1):"";sTimeout="ebay.oDocument._getControl('rtm').setRTMContent(["+
+rtmArr+"],["+rtmArr+"])";timeout=1500;}
+this.timeoutID=window.setTimeout(sTimeout,timeout);d.write(g.scriptTag(path));}}
+this.collectPids=function(pRTMs)
+{var ret="";if(pRTMs.length>0)
+{ret="&p=";for(var i=0;i<pRTMs.length;i++)
+ret+=pRTMs[i].id+(i<pRTMs.length-1?":":"");}
+return ret;}
+this.setRTMContent=function(pUrlArr,pSizeArr)
+{if(this.disableRTM)
+return;window.clearTimeout(this.timeoutID)
+var aRTMs=this.rtms;if(aRTMs.length>0)
+{for(i=0;i<aRTMs.length;i++)
+{var isdc=(pUrlArr[i]!=-1&&pUrlArr[i].indexOf(';')==0)?true:false;if(pUrlArr[i]==-1&&!document.layers)
+pUrlArr[i]=aRTMs[i].defUrl;else if(isdc)
+{var sz=";sz";if(pUrlArr[i].length==1)
+pUrlArr[i]=aRTMs[i].defAdUrl;else if(aRTMs[i].defAdUrl.indexOf(sz)!=-1)
+pUrlArr[i]=aRTMs[i].defAdUrl.replace(sz,pUrlArr[i]+sz)}
+if(document.layers)
+aRTMs[i].setILContent(pUrlArr[i]+'',pSizeArr[i]+'');else
+aRTMs[i].setIFContent(pUrlArr[i]+'');if(!isdc&&typeof(pSizeArr[i])!=un&&pSizeArr[i]!=-1)
+{if(pSizeArr[i].indexOf(":")!=-1)
+{var rSize=pSizeArr[i].split(":");aRTMs[i].ifResize(rSize[0],rSize[1]);}}}}}
+this.rdPage=function()
+{if(!this.rdUrl.is(''))
+document.location.replace(this.rdUrl)}}
+function ebRegisterRTM(pRTM)
+{if(pRTM)
+{var r=this.rtms.length;this.rtms[r]=pRTM;}}
+new EbayRTMPlacement(ebay.oDocument,"rtm");
+
+// \include\js\homepage\HomepageRedesign\HomepageRedesign.js@@\main\26 
+
+var FRAME_NAME='myframe';var MERCH_FRAME_NAME='merchandise_PromoTool';var bIsFrameLoaded=false;var bIsAdsDrawn=false;var ads_width=275;var ads_height=null;var ADS_BORDER_COLOR='fee859';var ads_chunk_a=2;var ads_chunk_a_height=0;var ads_chunk_b=4;var ads_chunk_b_height=0;var ads_chunk_c=8;var ads_chunk_c_height=0;var ads_sizes=new Array();var ads_promo_url='';var ads_cell_padding=4;var SEGMENT_VISITOR='hpA';var SEGMENT_BUYER='hpC';var SEGMENT_INACTIVE='hpB';var SEGMENT_SELLER='hpD';var SEGMENT_UNSUCCESSFUL_BID='hpE';var SEGMENT_FREQ_VISITOR='hpF';var FRAME_TIMEOUT=2000;var FRAME_INTERVAL=250;var blnIsMotorsSite=false;var totalTimePassed_merchandise=0;var totalTimePassed_greeting=0;var strSpacerHtml='<br><table width="100%" border="0" cellspacing="0" cellpadding="0">'+'<tr>'+'<td height="5"><img src="https://web.archive.org/web/20050413183952/http://pics.ebaystatic.com/aw/pics/x.gif" width="1" height="5"></td>'+'</tr>'+'</table>';function writeMyEbayAtAGlance(pAppServerUrl)
+{if(document.layers)
+{}
+else
+{document.write("<iframe src=\""+pAppServerUrl+"ebayISAPI.dll?HomeLandingPage\" name=\""+FRAME_NAME+"\" id=\""+
+FRAME_NAME+"\" marginwidth=\"0\" marginheight=\"0\" scrolling=\"no\" frameborder=\"0\" "+"style=\"width=100%;height=1px;\">"+"&nbsp;</iframe>");}}
+function writeMerchandiseProducts(pSegment,pPromoAdsUrl)
+{if(pPromoAdsUrl)ads_promo_url=pPromoAdsUrl;document.write('<div id="merchandiseProducts" name="merchandiseProducts">&nbsp;</div>');if(!isAuthenticatedUser()&&!isIdentifiedUser())
+{initMerchandiseProductVars();drawAds(pSegment,ads_chunk_c,ads_chunk_c_height);bIsAdsDrawn=true;}
+writeMerchandiseProductsHelper(pSegment);}
+function writeMerchandiseProductsHelper(pSegment)
+{var intTotalReminders=0;if(parent.frames[FRAME_NAME]==null)
+{initMerchandiseProductVars();drawAds(pSegment,ads_chunk_c,ads_chunk_c_height);}
+else if(totalTimePassed_merchandise>=FRAME_TIMEOUT)
+{if(eval(FRAME_NAME+'.TotalReminders'))
+{intTotalReminders=eval(FRAME_NAME+'.TotalReminders');adjustIFrameSize(FRAME_NAME);if(isAuthenticatedUser()||isIdentifiedUser())
+{initMerchandiseProductVars();if(intTotalReminders>=7)
+drawAds(pSegment,ads_chunk_a,ads_chunk_a_height);else if(intTotalReminders>=3)
+drawAds(pSegment,ads_chunk_b,ads_chunk_b_height);else
+drawAds(pSegment,ads_chunk_c,ads_chunk_c_height);}}
+else
+{hideIFrame(eval(FRAME_NAME),FRAME_NAME);initMerchandiseProductVars();drawAds(pSegment,ads_chunk_c,ads_chunk_c_height);}}
+else if(bIsFrameLoaded)
+{intTotalReminders=eval(FRAME_NAME+'.TotalReminders');adjustIFrameSize(FRAME_NAME);if(isAuthenticatedUser()||isIdentifiedUser())
+{initMerchandiseProductVars();if(intTotalReminders>=7)
+drawAds(pSegment,ads_chunk_a,ads_chunk_a_height);else if(intTotalReminders>=3)
+drawAds(pSegment,ads_chunk_b,ads_chunk_b_height);else
+drawAds(pSegment,ads_chunk_c,ads_chunk_c_height);}}
+else
+setTimeout('writeMerchandiseProductsHelper("'+pSegment+'")',FRAME_INTERVAL);totalTimePassed_merchandise+=FRAME_INTERVAL;}
+function initMerchandiseProductVars()
+{if(country=='us')
+{ads_sizes=[ads_width+'x73'];if(blnIsMotorsSite)
+{ads_chunk_a=4;ads_chunk_b=4;ads_chunk_c=4;ads_chunk_a_height=310;ads_chunk_b_height=310;ads_chunk_c_height=310;}
+else
+{ads_chunk_a=2;ads_chunk_b=4;ads_chunk_c=8;ads_chunk_a_height=146;ads_chunk_b_height=310;ads_chunk_c_height=584;}}
+else if(country=='ca')
+{ads_sizes=[ads_width+'x73'];ads_chunk_a=2;ads_chunk_b=4;ads_chunk_c=8;ads_chunk_a_height=146;ads_chunk_b_height=310;ads_chunk_c_height=520;}
+else if(country=='au')
+{ads_sizes=[ads_width+'x73',ads_width+'x73',ads_width+'x146',ads_width+'x220'];ads_chunk_a=2;ads_chunk_b=3;ads_chunk_c=4;ads_chunk_a_height=146;ads_chunk_b_height=292;ads_chunk_c_height=512;}
+else if((country=='de')||(country=='at'))
+{ads_sizes=[ads_width+'x100'];ads_chunk_a=2;ads_chunk_b=3;ads_chunk_c=4;ads_chunk_a_height=200;ads_chunk_b_height=300;ads_chunk_c_height=400;ADS_BORDER_COLOR='ffffff';ads_cell_padding=0;}
+else if(country=='ch')
+{ads_sizes=[ads_width+'x100'];ads_chunk_a=3;ads_chunk_b=4;ads_chunk_c=5;ads_chunk_a_height=200;ads_chunk_b_height=300;ads_chunk_c_height=400;ADS_BORDER_COLOR='ffffff';ads_cell_padding=0;}
+else if(country=='es')
+{ads_sizes=[ads_width+'x73'];ads_chunk_a=2;ads_chunk_b=4;ads_chunk_c=8;ads_chunk_a_height=195;ads_chunk_b_height=280;ads_chunk_c_height=360;}
+else if(country=='fr')
+{ads_width=272;ads_sizes=[ads_width+'x171'];ads_chunk_a=1;ads_chunk_b=2;ads_chunk_c=3;ads_chunk_a_height=171;ads_chunk_b_height=342;ads_chunk_c_height=513;}
+else if(country=='it')
+{ads_chunk_a=2;ads_chunk_b=4;ads_chunk_c=8;ads_chunk_a_height=200;ads_chunk_b_height=400;ads_chunk_c_height=600;}
+else if(country=='befr')
+{ads_chunk_a=2;ads_chunk_b=4;ads_chunk_c=8;ads_chunk_a_height=200;ads_chunk_b_height=380;ads_chunk_c_height=556;}
+else if(country=='benl')
+{ads_chunk_a=2;ads_chunk_b=4;ads_chunk_c=8;ads_chunk_a_height=200;ads_chunk_b_height=380;ads_chunk_c_height=556;}
+else if(country=='nl')
+{ads_chunk_a=2;ads_chunk_b=4;ads_chunk_c=8;ads_chunk_a_height=200;ads_chunk_b_height=350;ads_chunk_c_height=700;}
+else if(country=='in')
+{ads_chunk_a=2;ads_chunk_b=4;ads_chunk_c=8;ads_chunk_a_height=170;ads_chunk_b_height=340;ads_chunk_c_height=584;}}
+function drawAds(pSegment,pNumAds,pTotalHeight)
+{if(!bIsAdsDrawn)
+{var h='';if(ads_promo_url!='')
+{h='<iframe src="'+ads_promo_url+'/'+pSegment+'_side_promo'+pNumAds+'.html" name="'+MERCH_FRAME_NAME+'" id="merchandise_PromoTool" '+'marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="width:'+ads_width+'px;height:'+pTotalHeight+'px;"></iframe>';}
+else
+{var strDartSite='';var strZone='';var strDartSitePre='homepage.'
+if(blnIsMotorsSite)
+strDartSitePre='6000.';if((country=='at')||(country=='ch'))
+{strDartSite=strDartSitePre+'member';strZone='member';}
+else if(pSegment==SEGMENT_BUYER)
+{strDartSite=strDartSitePre+'buyer';strZone='buyer';}
+else if(pSegment==SEGMENT_INACTIVE)
+{strDartSite=strDartSitePre+'inactive';strZone='inactive';}
+else if(pSegment==SEGMENT_SELLER)
+{strDartSite=strDartSitePre+'seller';strZone='seller';}
+else if(pSegment==SEGMENT_UNSUCCESSFUL_BID)
+{if((country=='us')||(country=='ca')||(country=='au'))
+{strDartSite=strDartSitePre+'unsuccessfulbid';strZone='unsuccessfulbid';}
+else
+{strDartSite=strDartSitePre+'unsuccessful';strZone='unsuccessful';}}
+else if(pSegment==SEGMENT_FREQ_VISITOR)
+{strDartSite=strDartSitePre+'frequent';strZone='frequent';}
+if(blnIsMotorsSite)
+strZone='homepage';var cfg1;if(pNumAds>1)
+{cfg1=getStandardAdConfig('generic',strDartSite,[strZone],null,null,null,ads_width+(2*ads_cell_padding),pTotalHeight+pNumAds+1+(pNumAds*2*ads_cell_padding));setCustomAdParam(cfg1,new Array('tn='+pNumAds,'to=v','tcs='+ads_cell_padding,'tsc='+ADS_BORDER_COLOR,'tsw=1'));if(ads_sizes.length>1)
+{var strSzs='';for(var i=0;i<ads_sizes.length;i++)
+{if(i==0)
+strSzs=ads_sizes[i];else
+strSzs=strSzs+','+ads_sizes[i];}
+setCustomAdParam(cfg1,'szs='+strSzs);}
+else
+setCustomAdParam(cfg1,'sz='+ads_sizes[0]);}
+else
+{cfg1=getStandardAdConfig('generic',strDartSite,[strZone],1,ads_width,ads_chunk_a_height,null,null);}
+var c=ebay.oDocument.getConfig('hpRedesign');if(c&&c.sCustomAdParams)
+setCustomAdParam(cfg1,c.sCustomAdParams);if(country=='fr')
+{var strMerchHeader=typeof(merchandiseHeaderText)!='undefined'?merchandiseHeaderText:'A ne pas manquer';h+='<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#fee859">';h+=' <tr>';h+='  <td width="1" bgcolor="#fee859"><img src="https://web.archive.org/web/20050413183952/http://pics.ebaystatic.com/aw/pics/x.gif" width="1" height="1"></td>';h+='  <td  width="14" height="25" valign="middle"  bgcolor="#fee859">&nbsp;<img src="https://web.archive.org/web/20050413183952/http://pics.ebaystatic.com/aw/pics/sell/hub/imgSellHub_10x12.gif" border="0"></td>';h+='  <td width="100%" height="25" valign="middle"  bgcolor="#fee859">&nbsp;<b>'+strMerchHeader+'</b></td>';h+='  <td width="1" bgcolor="#fee859"><img src="https://web.archive.org/web/20050413183952/http://pics.ebaystatic.com/aw/pics/x.gif" width="1" height="1"></td>';h+=' </tr>';h+='</table>';}
+h+=getStandardAdHTML(cfg1);}
+var htmlElement=document.getElementById('merchandiseProducts');if(htmlElement)
+htmlElement.innerHTML=h;}}
+function writeGreetingLocalized(pHello,pSignInOrRegister,pNotUserId,pSignOut)
+{if(typeof(u1p)=='undefined')
+return;var strHtml='';var bIsAuthenticated=isAuthenticatedUser();var bIsIdentified=isIdentifiedUser();if(!bIsAuthenticated&&!bIsIdentified)
+{strHtml='<font size="2" face="Arial, Helvetica, sans-serif"><b>'+pHello+'!'+' </b>'+pSignInOrRegister+'</font>';document.write(strHtml+strSpacerHtml);}
+else
+{document.write('<div id="greeting" name="greeting">&nbsp;</div>');writeGreetingHelper(pHello,pNotUserId,pSignOut);}}
+function writeGreeting(pSignInPath,pCgiSslPath,pHomePagePath)
+{var strSignInOrRegister='<a href=\"'+pSignInPath+'eBayISAPI.dll?SignIn&ru='+escape(pHomePagePath)+'\">Sign in</a> or <a href=\"'+pCgiSslPath+'eBayISAPI.dll?RegisterEnterInfo\">register</a>.';var strNotUserIdClickHere='(Not your User ID? <a href=\"'+pSignInPath+'eBayISAPI.dll?SignIn&ru='+escape(pHomePagePath)+'\">Click Here</a>.)';var strSignOut='(<a href=\"'+pSignInPath+'eBayISAPI.dll?SignIn&ssPageName=h:h:sout:US\">Sign out</a>)';writeGreetingLocalized('Hello',strSignInOrRegister,strNotUserIdClickHere,strSignOut);}
+function writeGreetingHelper(pHelloTxt,pNotUserIdTxt,pSignOutTxt)
+{var objFrame=window.frames[FRAME_NAME];var strUsername='';var reg1=new RegExp("\"","g");var reg2=new RegExp("\'","g");if(objFrame&&bIsFrameLoaded)
+{strUsername=objFrame.username;if(isAuthenticatedUser())
+{strHtml='<font size="2" face="Arial, Helvetica, sans-serif"><b>'+pHelloTxt+', '+strUsername+'!'+'</b> '+'<font size="1" face="Verdana, Arial, Helvetica, sans-serif">'+pSignOutTxt+'</font></font>';document.getElementById('greeting').innerHTML=strHtml+strSpacerHtml;}
+else if(isIdentifiedUser())
+{strHtml='<font size="2" face="Arial, Helvetica, sans-serif"><b>'+pHelloTxt+' '+strUsername+'!'+'</b><br>'+'<font size="1" face="Verdana, Arial, Helvetica, sans-serif">'+pNotUserIdTxt+'</font></font>';document.getElementById('greeting').innerHTML=strHtml+strSpacerHtml;}}
+else if(totalTimePassed_greeting>=FRAME_TIMEOUT)
+{if(objFrame&&objFrame.username)
+{strUsername=objFrame.username;if(isAuthenticatedUser())
+{strHtml='<font size="2" face="Arial, Helvetica, sans-serif"><b>'+pHelloTxt+', '+strUsername+'!'+'</b> '+'<font size="1" face="Verdana, Arial, Helvetica, sans-serif">'+pSignOutTxt+'</font></font>';document.getElementById('greeting').innerHTML=strHtml+strSpacerHtml;}
+else if(isIdentifiedUser())
+{strHtml='<font size="2" face="Arial, Helvetica, sans-serif"><b>'+pHelloTxt+' '+strUsername+'!'+'</b><br>'+'<font size="1" face="Verdana, Arial, Helvetica, sans-serif">'+pNotUserIdTxt+'</font></font>';document.getElementById('greeting').innerHTML=strHtml+strSpacerHtml;}}}
+else
+setTimeout('writeGreetingHelper(\''+pHelloTxt+'\',\''+pNotUserIdTxt.replace(reg1,'\\"').replace(reg2,'\\\'')+'\',\''+pSignOutTxt.replace(reg1,'\\"').replace(reg2,'\\\'')+'\');',FRAME_INTERVAL);totalTimePassed_greeting+=FRAME_INTERVAL;}
+function isAuthenticatedUser()
+{return(ReadCookie("ebaysignin")=="in")}
+function isIdentifiedUser()
+{return(ReadCookie("keepmesignin")=="in")}
+function adjustIFrameSize(pStrFrameName){var iframeElement=parent.document.getElementById(pStrFrameName);var iframeWindow=parent.frames[pStrFrameName];if(is.safari)
+{iframeWindow=iframeElement;}
+var adjustSize=false;var iframeWidth=0;var iframeHeight=0;if(iframeWindow.document.height||is.safari)
+{if(is.safari)
+{var calc=iframeWindow.document.body.offsetHeight;}
+iframeWidth=iframeWindow.document.width;iframeHeight=iframeWindow.document.height+1;adjustSize=true;}
+else if(document.all)
+{if(is.win)
+{iframeWidth=iframeWindow.document.body.scrollWidth;iframeHeight=iframeWindow.document.body.scrollHeight;adjustSize=true;}
+else
+{iframeWidth=iframeWindow.document.body.offsetWidth;iframeHeight=iframeWindow.document.body.offsetHeight;adjustSize=true;}}
+if(adjustSize)
+{iframeElement.style.width=iframeWidth+"px";iframeElement.style.height=iframeHeight+"px";}}
+function hideIFrame(iframeWindow,pFrameName){if(document.getElementById(pFrameName)){var iframeElement=document.getElementById(pFrameName);iframeElement.style.height=0+'px';iframeElement.style.width=0+'px';}
+else if(document.all){var iframeElement=parent.document.all[iframeWindow.name];iframeElement.style.height=0+'px';iframeElement.style.width=0+'px';}}
+function writeEbayExplained(pHtmlPath,pSegment)
+{var strHtml='';if(isAuthenticatedUser()||isIdentifiedUser())
+strHtml='<iframe src="'+pHtmlPath+'/uk_'+pSegment+'_SignedIn.html" name="ebayExplained" id="ebayExplained" '+'marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="width=275px;height=600px;" height="600"></iframe>';else
+strHtml='<iframe src="'+pHtmlPath+'/uk_'+pSegment+'_SignedOut.html" name="ebayExplained" id="ebayExplained" '+'marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="width=275px;height=600px;" height="600"></iframe>';document.write(strHtml);setTimeout('writeEbayExplainedHelper()',2000);}
+function writeEbayExplainedHelper()
+{var intTotalReminders=0;if(bIsFrameLoaded)
+{intTotalReminders=eval(FRAME_NAME+'.TotalReminders');adjustIFrameSize(FRAME_NAME);}
+else
+hideIFrame(eval(FRAME_NAME),FRAME_NAME);}
+ebayDowngradeDomain();
+
+// \include\js\lib\features\favnav\favoritesNavigation.js@@\main\12 
+
+function eBayFavNavOnload()
+{if(typeof(favnav_frame_config)=="undefined")
+{return false;}
+if(!(is.mac&&is.ie))
+{ebayDowngradeDomain();}
+var init_ebayDoc=false;if(typeof(document.ebayDoc)=="undefined")
+{ebayDoc=new EbayDocument(window,"favnav");init_ebayDoc=true;}
+else
+{ebayDoc=document.ebayDoc;}
+if(favnav_frame_config)
+{frame=new EbayFrame(ebayDoc,ebayDoc,"favnav_iframe",favnav_frame_config);}
+var x=new EbayCookie("ebay",null,null,null,null,null,true);x.read();var fn_user_lmd=x.getCookielet("sfLMD");var un="undefined";if(typeof(frame)!=un)
+{if(typeof(frame.config)!=un)
+{if(typeof(frame.config.url)!=un)
+{var parsed_url=frame.config.url.replaceTokens(fn_user_lmd);frame.config.url=parsed_url;}}}
+if(init_ebayDoc)
+{ebayDoc.onLoad();}}
+if(typeof(ebay)!="undefined")
+{ebay._registerListener(ebay.oDocument._getEvent("load"),ebay.EVENT_BEFORE,"eBayFavNavOnload");}
+if(!window.toolboxOnLoad)
+{window.toolboxOnLoad=function(){};}
+function toolboxOnUnload()
+{killControls(ebayDoc);ebayDoc.htmlDoc.ebayDoc=null;}
+function killControls(pObj)
+{var cts=pObj.controls,len=cts.length;for(var i=0;i<len;i++)
+{killControls(cts[i]);if(cts[i].htmlElement)
+cts[i].htmlElement.ebayControl=null;}}
+//-->
+}
+
+/*
+     FILE ARCHIVED ON 18:39:52 Apr 13, 2005 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 15:16:16 Apr 29, 2026.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  capture_cache.get: 0.346
+  load_resource: 270.694
+  PetaboxLoader3.resolve: 50.324
+  PetaboxLoader3.datanode: 30.627
+*/
